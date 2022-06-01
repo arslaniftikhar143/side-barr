@@ -2,8 +2,15 @@ import React from 'react'
 
 function Analytics() {
   return (
-    <h1>Analytics</h1>
+   
+    <>
+    <input type="text"name="email" placeholder='email' />
+    <input type="text"name="password" placeholder='password' />
+    <button>Login</button>
+
+    </>
   )
 }
+
 
 export default Analytics

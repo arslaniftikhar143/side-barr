@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaBars, FaHome } from "react-icons/fa";
+import { FaBars, FaHome, FaUserAlt, FaLock } from "react-icons/fa";
 import { BiAnalyse, BiSearch } from "react-icons/bi";
 import { MdMessage } from "react-icons/md";
 import { FiSettings } from "react-icons/fi";
 import { NavLink } from "react-router-dom";
+import SidebarMenu from "./SidebarMenu";
+import { ImExit } from "react-icons/im";
+
 const routes = [
   {
     path: "/",
@@ -25,6 +28,20 @@ const routes = [
     path: "/settings",
     name: "Settings",
     icon: <FiSettings />,
+    subRoutes: [
+      {
+        path: "/settings/profile",
+        name: "Profile",
+        icon: <FaUserAlt />,
+      },
+      { path: "/settings/security", name: "Security", icon: <FaLock /> },
+      { path: "/settings/logout", name: "LogOut", icon: <ImExit /> },
+    ],
+  },
+  {
+    path: "/messages",
+    name: "Messages",
+    icon: <MdMessage />,
   },
 ];
 function Sidebar({ children }) {
@@ -79,8 +96,7 @@ function Sidebar({ children }) {
             damping: 10,
           },
         }}
-        className="sidebar"
-      >
+        className="sidebar">
         <div className="logo__container">
           <AnimatePresence>
             {isOpen && <h1 className="logo">SideBarr</h1>}
@@ -109,13 +125,24 @@ function Sidebar({ children }) {
         </div>
         <div className="routes">
           {routes.map((route, index) => {
+            if (route.subRoutes) {
+              return (
+                <SidebarMenu
+                  textAnimate={textAnimate}
+                  key={route.name}
+                  route={route}
+                  isOpen={isOpen}
+                  SetIsopen={SetIsopen}
+                />
+              );
+            }
+
             return (
               <NavLink
                 activeClassName="active"
                 to={route.path}
                 className="route"
-                key={index}
-              >
+                key={index}>
                 <div className="route__icon">{route.icon}</div>
                 {isOpen && (
                   <motion.div
@@ -123,8 +150,7 @@ function Sidebar({ children }) {
                     initial="hidden"
                     animate="visible"
                     exit="hidden"
-                    className="route__text"
-                  >
+                    className="route__text">
                     {route.name}
                   </motion.div>
                 )}

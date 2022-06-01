@@ -14,7 +14,11 @@ main {
   display: flex;
 }
 .sidebar {
-  background:linear-gradient(to bottom right, rgba(35, 0, 115, 0.974), rgb(122, 0, 122));
+  background: linear-gradient(
+    to bottom right,
+    rgba(35, 0, 115, 0.974),
+    rgb(122, 0, 122)
+  );
   height: 100vh;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
@@ -49,9 +53,8 @@ main {
   color: white;
   height: 40px;
   margin-top: 10px;
-
 }
-.logo{
+.logo {
   margin-right: 10px;
 }
 .logo__container .top__icon {
@@ -80,4 +83,25 @@ main {
 .search__container input:focus-visible {
   outline: 1px solid white;
   border-bottom: 1px solid white;
+}
+.menu {
+  display: flex;
+  cursor: pointer;
+  color: white;
+  text-decoration: none;
+  width: 100%;
+  gap: 10px;
+  padding: 10px;
+  font-size: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.2s ease-in-out;
+}
+.menu__item {
+  display: flex;
+  gap: 10px;
+}
+.menu__container .route {
+  padding-left: 25px;
 }
